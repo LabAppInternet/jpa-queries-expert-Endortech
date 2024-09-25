@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface StationRepository extends JpaRepository<Station, String> {
-    List<StationDTO> findAllBy();
+    List<StationDTO> findAllProjectedBy();
     Station findByName(String name);
     StationDTO findProjectedByName(String name);
 }

@@ -1,6 +1,7 @@
 package cat.tecnocampus.fgcstations.application;
 
 import cat.tecnocampus.fgcstations.application.DTOs.*;
+import cat.tecnocampus.fgcstations.application.exception.UserDoesNotExistsException;
 import cat.tecnocampus.fgcstations.application.mapper.MapperHelper;
 import cat.tecnocampus.fgcstations.domain.FavoriteJourney;
 import cat.tecnocampus.fgcstations.domain.Journey;
@@ -9,8 +10,10 @@ import cat.tecnocampus.fgcstations.persistence.DayTimeStartRepository;
 import cat.tecnocampus.fgcstations.persistence.FavoriteJourneyRepository;
 import cat.tecnocampus.fgcstations.persistence.JourneyRepository;
 import cat.tecnocampus.fgcstations.persistence.UserRepository;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -32,10 +35,8 @@ public class FcgUserService {
     }
 
     public UserDTO getUserDTO(String username) {
-        //TODO 10.0: get the user (domain) given her username.
         User user = getDomainUser(username);
 
-        // TODO 11.0: get the user's favorite journeys
         user.setFavoriteJourneyList(getFavoriteJourneys(username));
 
         //domain users are mapped to DTOs
@@ -43,25 +44,32 @@ public class FcgUserService {
     }
 
     public User getDomainUser(String username) {
-        // TODO 10.1: get the user (domain) given her username. If the user does not exist, throw a UserDoesNotExistsException
-        //  You can solve this exercise without leaving this file
-        return null;
+
+        if(userRepository.findByUsername(username) == null){
+            throw new UserDoesNotExistsException(username);
+        }
+
+        return userRepository.findByUsername(username);
     }
 
 
     public UserDTOnoFJ getUserDTOWithNoFavoriteJourneys(String username) {
-        // TODO 12: get the user (UserDTOnoFJ) given her username. If the user does not exist, throw a UserDoesNotExistsException
-        return null;
+        if(userRepository.findByUsername(username) == null){
+            throw new UserDoesNotExistsException(username);
+        }
+        return userRepository.findUserDTOnoFJBy(username);
     }
 
     public UserDTOInterface getUserDTOInterface(String username) {
-        // TODO 13: get the user (UserDTOInterface) given her username. If the user does not exist, throw a UserDoesNotExistsException
-        return null;
+        if(userRepository.findByUsername(username) == null){
+            throw new UserDoesNotExistsException(username);
+        }
+        return userRepository.findUserDTOInterfaceByUsername(username);
     }
 
     public List<UserDTO> getUsers() {
-        //TODO 14: get all users (domain). You can solve this exercise without leaving this file
         List<User> users = new ArrayList<>(); //feed this list with the users
+        users = userRepository.findAll();
 
         //get the users' favorite journeys
         users.forEach(u -> u.setFavoriteJourneyList(getFavoriteJourneys(u.getUsername())));
@@ -93,6 +101,8 @@ public class FcgUserService {
         // TODO 11.1: get the user's favorite journeys given the User (domain object)
         List<FavoriteJourney> favoriteJourneys = new ArrayList<>(); //feed this list with the favorite journeys
         return favoriteJourneys;
+
+       // return user.getFavoriteJourneyList(); Asi tendria que ser??
     }
 
     public List<FavoriteJourneyDTO> getFavoriteJourneysDTO(String username) {

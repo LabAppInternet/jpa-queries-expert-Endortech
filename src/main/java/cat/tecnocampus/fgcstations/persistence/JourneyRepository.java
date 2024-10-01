@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface JourneyRepository extends JpaRepository<Journey, JourneyId> {
-    List<JourneyDTO> findAllProjectedBy();
+    List<JourneyDTO> findAllDTOBy();
     Journey findJourneyByOriginAndDestination(String origin, String destination);
     JourneyId findJourneyIdByOriginAndDestination(String origin, String destination);
 }

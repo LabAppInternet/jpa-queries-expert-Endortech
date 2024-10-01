@@ -22,7 +22,7 @@ public class FgcJourneyService {
     }
 
     public List<JourneyDTO> getAllJourneysDTO() {
-        return journeyRepository.findAllProjectedBy();
+        return journeyRepository.findAllDTOBy();
     }
 
     public Journey getJourneyDomain(String origin, String destination) {

@@ -18,7 +18,7 @@ public class FgcStationService {
     }
 
     public List<StationDTO> getStationsDTO() {
-         return stationRepository.findAllProjectedBy();
+         return stationRepository.findAllDTOBy();
     }
 
     public List<Station> getStationsDomain() {

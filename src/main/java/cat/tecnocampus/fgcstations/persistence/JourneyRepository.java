@@ -13,6 +13,6 @@ import java.util.Optional;
 
 public interface JourneyRepository extends JpaRepository<Journey, JourneyId> {
     List<JourneyDTO> findAllDTOBy();
-    Journey findJourneyByOriginAndDestination(String origin, String destination);
-    JourneyId findJourneyIdByOriginAndDestination(String origin, String destination);
+    Journey findJourneyByOriginNameAndDestinationName(String origin, String destination);
+    JourneyId findJourneyIdByOriginNameAndDestinationName(String origin, String destination);
 }

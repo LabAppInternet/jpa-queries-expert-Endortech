@@ -26,16 +26,16 @@ public class FgcJourneyService {
     }
 
     public Journey getJourneyDomain(String origin, String destination) {
-        if (journeyRepository.findJourneyByOriginAndDestination(origin, destination) == null){
+        if (journeyRepository.findJourneyByOriginNameAndDestinationName(origin, destination) == null){
             throw new JourneyDoesNotExistsException(origin, destination);
         }
-        return journeyRepository.findJourneyByOriginAndDestination(origin, destination);
+        return journeyRepository.findJourneyByOriginNameAndDestinationName(origin, destination);
     }
 
     public JourneyId getJourneyId(String origin, String destination) {
-        if (journeyRepository.findJourneyIdByOriginAndDestination(origin, destination) == null){
+        if (journeyRepository.findJourneyIdByOriginNameAndDestinationName(origin, destination) == null){
             throw new JourneyDoesNotExistsException(origin, destination);
         }
-        return journeyRepository.findJourneyIdByOriginAndDestination(origin, destination);
+        return journeyRepository.findJourneyIdByOriginNameAndDestinationName(origin, destination);
     }
 }

@@ -13,6 +13,7 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, String> {
     User findByUsername(String username);
+    /*
     UserDTOnoFJ findUserDTOnoFJBy(String username);
     UserDTOInterface findUserDTOInterfaceByUsername(String username);
     List<UserDTOInterface> findAllUserByNameAndSecondName(String name, String secondName);
@@ -31,4 +32,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     "ORDER BY days DESC" +
     "LIMIT 1", nativeQuery = true)
     List<PopularDayOfWeek> popularDayTimeStarts();
+
+     */
 }

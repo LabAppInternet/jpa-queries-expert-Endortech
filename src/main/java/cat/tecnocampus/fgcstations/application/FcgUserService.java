@@ -57,14 +57,14 @@ public class FcgUserService {
         if(userRepository.findByUsername(username) == null){
             throw new UserDoesNotExistsException(username);
         }
-        return null; // userRepository.findUserDTOnoFJBy(username);
+        return userRepository.findUserDTOnoFJBy(username);
     }
 
     public UserDTOInterface getUserDTOInterface(String username) {
         if(userRepository.findByUsername(username) == null){
             throw new UserDoesNotExistsException(username);
         }
-        return null;// userRepository.findUserDTOInterfaceByUsername(username);
+        return userRepository.findUserDTOInterfaceByUsername(username);
     }
 
     public List<UserDTO> getUsers() {
@@ -88,12 +88,12 @@ public class FcgUserService {
     public List<UserTopFavoriteJourney> getTop3UsersWithMostFavoriteJourneys() {
         // TODO 16: get the top 3 users (UserTopFavoriteJourney) with the most favorite journeys DONE
 
-        return null; //userRepository.findTop3UsersWithMostFavoriteJourneys();
+        return userRepository.findTop3UsersWithMostFavoriteJourneys();
     }
 
     public List<UserDTOInterface> getUsersByNameAndSecondName(String name, String secondName) {
         // TODO 17: get the users (UserDTOInterface) given their name and second name. Try not to use any sql (jpql) query DONE
-        return null; //userRepository.findAllUserByNameAndSecondName(name, secondName);
+        return userRepository.findAllUserByNameAndSecondName(name, secondName);
     }
 
     public List<FavoriteJourney> getFavoriteJourneys(String username) {
@@ -136,6 +136,6 @@ public class FcgUserService {
 
     public List<PopularDayOfWeek> getPopularDayOfWeek() {
         // TODO 18: get the most popular day of the week (PopularDayOfWeek) among the dayTimeStarts DONE
-        return null; // userRepository.popularDayTimeStarts();
+        return userRepository.popularDayTimeStarts();
     }
 }
